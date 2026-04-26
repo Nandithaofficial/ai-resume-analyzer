@@ -17,7 +17,20 @@ const groq = new Groq({
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../frontend")));
+const frontendPath = path.join(__dirname, "../frontend");
+console.log("📁 Frontend path:", frontendPath);
+console.log("📁 Frontend exists:", fs.existsSync(frontendPath));
+app.use(express.static(frontendPath));
+
+// Fallback route
+app.get("/", (req, res) => {
+    const indexPath = path.join(__dirname, "../frontend/index.html");
+    if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+    } else {
+        res.send("Server is running! Frontend not found at: " + indexPath);
+    }
+});
 
 if (!fs.existsSync("uploads")) {
     fs.mkdirSync("uploads");
