@@ -20,7 +20,11 @@ app.use(express.json());
 const frontendPath = path.join(__dirname, "../frontend");
 console.log("📁 Frontend path:", frontendPath);
 console.log("📁 Frontend exists:", fs.existsSync(frontendPath));
-app.use(express.static(frontendPath));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 // Fallback route
 app.get("/", (req, res) => {
