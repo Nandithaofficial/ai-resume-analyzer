@@ -1,4 +1,3 @@
-/*
 require("dotenv").config();
 
 const Groq = require("groq-sdk");
@@ -170,16 +169,4 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
-*/
-require("dotenv").config();
-const express = require("express");
-const app = express();
 
-app.get("/", (req, res) => {
-    res.send("✅ Server is working!");
-});
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-});
